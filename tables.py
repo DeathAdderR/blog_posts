@@ -25,7 +25,7 @@ class BlogTable:
 
     def close_database(self):
         self.connection.close()
-        print("...connection to block_table terminated...")
+        print("...connection to blog_table terminated...")
 
     def execute_query(self, query, data=None):
         try:
@@ -33,13 +33,13 @@ class BlogTable:
                 self.cursor.execute(query, data)
             else:
                 self.cursor.execute(query)
-    
+
             if query.strip().lower().startswith('select'):
                 return self.cursor.fetchall()
-    
+
             self.connection.commit()  # Ensure commit is run after insertions
             print('Commit successful!')
-    
+
         except sqlite3.IntegrityError as e:
             print(f"SQL ERROR: IntegrityError: {e}")
         except sqlite3.OperationalError as e:
